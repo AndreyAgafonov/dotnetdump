@@ -20,5 +20,6 @@ fullPath=$pathToDump$file_name
 
 /root/.dotnet/tools/dotnet-dump collect -p 1 --output $fullPath
 gzip $fullPath
-aws s3 cp  $fullPath.gz  s3://smartcat-web-dumps/ --acl public-read --no-progress
+aws s3 cp  $fullPath.gz  s3://smartcat-web-dumps/ --no-progress
+#--acl public-read
 rm $fullPath.gz
