@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $HOSTNAME
 apt-get update && apt-get install -y wget gpg apt-transport-https gzip unzip
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
 mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
