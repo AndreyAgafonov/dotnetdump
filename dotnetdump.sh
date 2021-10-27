@@ -15,10 +15,10 @@ dotnet tool install --global dotnet-dump
 
 pathToDump=/tmp/dumps/
 mkdir $pathToDump
-file_name=core_$(date '+%Y%m%d-%H%M%S')
+file_name=${HOSTNAME}_core_$(date '+%Y%m%d-%H%M%S')
 fullPath=$pathToDump$file_name
 
 /root/.dotnet/tools/dotnet-dump collect -p 1 --output $fullPath
 gzip $fullPath
-aws s3 cp  $fullPath.gz  s3://smartcat-web-dumps/$HOSTNAME/ --acl public-read --no-progress
+aws s3 cp  $fullPath.gz  s3://smartcat-web-dumps/ --acl public-read --no-progress
 rm $fullPath.gz
