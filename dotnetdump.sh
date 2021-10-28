@@ -32,12 +32,12 @@ ENDARC=$(date +%s%N)
 aws s3 cp  $fullPathCore.gz  s3://smartcat-web-dumps/ --no-progress
 ENDUPLOAD=$(date +%s%N)
 rm $fullPathCore.gz
-DIFFDUMP=$(($($ENDDUMP - $START)/1000000))
-DIFFARC=$(($($ENDARC - $ENDDUMP)/1000000))
-DIFFUPLOAD=$(($($ENDUPLOAD - $ENDARC)/1000000))
-echo "dotnet-dump: Time to dump $DIFFDUMP" >$fullPathMeta
-echo "dotnet-dump: Time to dump $DIFFARC" >>$fullPathMeta
-echo "dotnet-dump: Time to dump $DIFFUPLOAD" >>$fullPathMeta
+DIFFDUMP=$((($ENDDUMP - $START)/1000000))
+DIFFARC=$((($ENDARC - $ENDDUMP)/1000000))
+DIFFUPLOAD=$((($ENDUPLOAD - $ENDARC)/1000000))
+echo "dotnet-dump: Time to dump $DIFFDUMP ms" >$fullPathMeta
+echo "dotnet-dump: Time to dump $DIFFARC ms" >>$fullPathMeta
+echo "dotnet-dump: Time to dump $DIFFUPLOAD ms" >>$fullPathMeta
 
 START=$(date +%s%N)
 /root/.dotnet/tools/dotnet-gcdump collect -p 1 --output $fullPathGc
@@ -47,12 +47,12 @@ ENDARC=$(date +%s%N)
 aws s3 cp  $fullPathGc.gz  s3://smartcat-web-dumps/ --no-progress
 ENDUPLOAD=$(date +%s%N)
 rm $fullPathGc.gz
-DIFFDUMP=$(($($ENDDUMP - $START)/1000000))
-DIFFARC=$(($($ENDARC - $ENDDUMP)/1000000))
-DIFFUPLOAD=$(($($ENDUPLOAD - $ENDARC)/1000000))
-echo "dotnet-gcdump: Time to dump $DIFFDUMP" >>$fullPathMeta
-echo "dotnet-gcdump: Time to dump $DIFFARC" >>$fullPathMeta
-echo "dotnet-gcdump: Time to dump $DIFFUPLOAD" >>$fullPathMeta
+DIFFDUMP=$((($ENDDUMP - $START)/1000000))
+DIFFARC=$((($ENDARC - $ENDDUMP)/1000000))
+DIFFUPLOAD=$((($ENDUPLOAD - $ENDARC)/1000000))
+echo "dotnet-gcdump: Time to dump $DIFFDUMP ms" >>$fullPathMeta
+echo "dotnet-gcdump: Time to dump $DIFFARC ms" >>$fullPathMeta
+echo "dotnet-gcdump: Time to dump $DIFFUPLOAD ms" >>$fullPathMeta
 
 gzip $fullPathMeta
 aws s3 cp  $fullPathMeta.gz  s3://smartcat-web-dumps/ --no-progress
