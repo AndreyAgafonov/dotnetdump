@@ -11,7 +11,8 @@ apt-get update && apt-get install dotnet-sdk-3.1 -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip -f awscliv2.zip
 ./aws/install
-dotnet tool install --global dotnet-dump dotnet-gcdump
+dotnet tool install --global dotnet-dump
+dotnet tool install --global dotnet-gcdump
 
 pathToDump=/tmp/dumps/
 mkdir $pathToDump
