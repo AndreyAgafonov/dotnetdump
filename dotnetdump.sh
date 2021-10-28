@@ -8,11 +8,12 @@ mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
 chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 apt-get update && apt-get install dotnet-sdk-3.1 -y
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip -f awscliv2.zip
-./aws/install
 dotnet tool install --global dotnet-dump
 dotnet tool install --global dotnet-gcdump
+wrkdir=/tmp
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$wrkdir/awscliv2.zip"
+unzip -o $wrkdir/awscliv2.zip
+$wrkdir/aws/install
 
 pathToDump=/tmp/dumps/
 mkdir $pathToDump
